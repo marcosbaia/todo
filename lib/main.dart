@@ -26,7 +26,6 @@ class HomePage extends StatefulWidget {
     items.add(Item(title: "Item 2", done: true));
     items.add(Item(title: "Item 3", done: false));
   }
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -38,8 +37,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Todo List"),
       ),
-      body: Container(
-        child: Center(child: Text("Olá Mundo")),
+      body: ListView.builder(
+        itemCount: widget.items.length,
+        itemBuilder: (BuildContext ctxt, int index) {
+          final item = widget.items[index];
+          return CheckboxListTile(
+            title: Text(item.title),
+            key: Key(item.title),
+            value: item.done,
+            onChanged: (value){},
+          );
+        },
       ),
     );
   }
